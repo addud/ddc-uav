@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 public class CameraApp extends Activity {
 
 	protected static final String TAG = "CameraApp";
+	private String wpTag = "";
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -33,6 +34,8 @@ public class CameraApp extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cam_layout);
+		Bundle extras = getIntent().getExtras();
+		wpTag = extras.getString("wp_tag");
 		// Used to get a new instance or the camera
 		mCamera = getCameraInstance();
 		// If the camera is not available, terminate the activity
@@ -91,7 +94,7 @@ public class CameraApp extends Activity {
 		public void onPictureTaken(byte[] data, Camera camera) {
 
 			// Creating the file
-			File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+			File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE, wpTag);
 			if (pictureFile == null) {
 				Log.d(TAG,
 						"Error creating media file, check storage permissions: ");
@@ -117,7 +120,7 @@ public class CameraApp extends Activity {
 	};
 
 	/** Create a File for saving an image or video */
-	private static File getOutputMediaFile(int type) {
+	private static File getOutputMediaFile(int type, String wpTag) {
 		// Making sure the SD-card is available before
 		// writing to it
 		boolean mExternalStorageAvailable = false;
@@ -156,12 +159,12 @@ public class CameraApp extends Activity {
 		}
 
 		// Create a media file name
-		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+		String timeStamp = new SimpleDateFormat("MMdd_HHmmss")
 				.format(new Date());
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator
-					+ "IMG_" + timeStamp + ".jpg");
+					+ wpTag + "_" + timeStamp + ".jpg");
 		} else {
 			return null;
 		}
