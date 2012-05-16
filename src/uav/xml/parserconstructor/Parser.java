@@ -32,7 +32,8 @@ public class Parser {
 						+ "<coordinate><id>0</id><lat>59.84138710000000</lat><lng>17.645552900000000</lng><picture/><data/></coordinate>"
 						+ "<coordinate><id>0</id><lat>59.84117250000000</lat><lng>17.645402900000000</lng><picture/><data/></coordinate>"
 						+ "<coordinate><id>0</id><lat>59.84137610000000</lat><lng>17.645132900000000</lng><picture/><data/></coordinate>"
-						+ "<coordinate><id>0</id><lat>59.84137100000000</lat><lng>17.645181900000000</lng><picture/><data/></coordinate>"
+						// +
+						// "<coordinate><id>0</id><lat>59.84137100000000</lat><lng>17.645181900000000</lng><picture/><data/></coordinate>"
 						+ "</coordinates>"));
 
 		// xpp.setInput(new StringReader (getXMLfromSD()));
@@ -61,6 +62,7 @@ public class Parser {
 					// "").trim().substring(0, 9))+",";
 					wyp.setLon(Integer.valueOf(xpp.getText().toString()
 							.replace(".", "").trim().substring(0, 9)));
+
 					pointList.add(wyp);
 				}
 			}

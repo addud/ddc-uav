@@ -15,6 +15,7 @@ public class UAVController extends Thread {
 	private List<NCWayPoint> wp_list;
 	private NCSerialProtocol nc;
 	private boolean event_finished = true;
+	private NCWayPoint current_wp;
 
 	public UAVController(List<NCWayPoint> wp_list) {
 		this.wp_list = wp_list;
@@ -80,6 +81,7 @@ public class UAVController extends Thread {
 
 				for (retries = 0; retries < UAVController.NUMBER_OF_RETRIES; retries++) {
 					nc.sendWaypoint(wp_index, wp_list.get(wp_index));
+					this.current_wp = wp_list.get(wp_index);
 					if (receiveCommand('w', 'W')) {
 						break;
 					}
@@ -117,7 +119,7 @@ public class UAVController extends Thread {
 					}
 
 					if (temp_wp_reached && this.isEventFinished()) {
-						if (wp_list.get(wp_index).getEvent().isEvent()) {
+						if (this.getCurrentWP().getEvent().isEvent()) {
 							setEventTrigger();
 						}
 						break;
@@ -138,6 +140,10 @@ public class UAVController extends Thread {
 		}
 		Log.d(TAG, "return");
 		return;
+	}
+
+	public NCWayPoint getCurrentWP() {
+		return this.current_wp;
 	}
 
 	public synchronized boolean readAndClearEventTrigger() {

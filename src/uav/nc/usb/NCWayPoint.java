@@ -20,6 +20,9 @@ public class NCWayPoint {
 	/** the altitude in deg*10^-7 **/
 	private int alt;
 
+	/** TODO: find out what this means **/
+	private int channel_event = 200;
+
 	private Event event;
 
 	private int status;
@@ -87,6 +90,14 @@ public class NCWayPoint {
 
 	public void setHoldTime(int t) {
 		hold_time = t;
+	}
+
+	public void setChannelEvent(int channel_event) {
+		this.channel_event = channel_event;
+	}
+
+	public int getChannelEvent() {
+		return channel_event;
 	}
 
 	public void setToleranceRadius(int tolerance_radius) {

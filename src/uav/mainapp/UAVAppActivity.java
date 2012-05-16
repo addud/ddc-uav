@@ -91,9 +91,9 @@ public class UAVAppActivity extends Activity {
 		new Thread(new Runnable() {
 			public void run() {
 				Intent intent = new Intent(UAVAppActivity.this, CameraApp.class);
-
 				for (;;) {
 					uav.readAndClearEventTrigger();
+					intent.putExtra("tag", uav.getCurrentWP().getTag());
 					startActivityForResult(intent, CAMERA_ACIVITY_ID);
 				}
 
