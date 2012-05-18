@@ -39,6 +39,12 @@ public class UAVAppActivity extends Activity {
 
 		context = getApplicationContext();
 
+		// KeyguardManager mKeyGuardManager = (KeyguardManager)
+		// getSystemService(KEYGUARD_SERVICE);
+		// KeyguardLock mLock = mKeyGuardManager
+		// .newKeyguardLock("activity_classname");
+		// mLock.disableKeyguard();
+
 		// Button actButton = (Button) findViewById(id.button_act);
 		//
 		// actButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +99,7 @@ public class UAVAppActivity extends Activity {
 				Intent intent = new Intent(UAVAppActivity.this, CameraApp.class);
 				for (;;) {
 					uav.readAndClearEventTrigger();
-					intent.putExtra("tag", uav.getCurrentWP().getTag());
+					intent.putExtra("wp_tag", uav.getCurrentWP().getTag());
 					startActivityForResult(intent, CAMERA_ACIVITY_ID);
 				}
 

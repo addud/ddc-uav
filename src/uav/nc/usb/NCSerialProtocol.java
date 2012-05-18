@@ -12,6 +12,7 @@ public class NCSerialProtocol {
 	public final static int RX_CRC_ERROR = -2;
 	public final static int RX_UNKNOWN = -3;
 	private static final byte NAVI_SLAVE_ADDR = 2;
+	private static final int NC_FLAG_TARGET_REACHED = 0x20;
 
 	private static final String TAG = "NCSerialProtocol";
 
@@ -307,15 +308,26 @@ public class NCSerialProtocol {
 			// log("rx sattelites: " + decoded_data[50]);
 			// log("rx holdtime: " + decoded_data[73]);
 
+			int target_reached = decoded_data[68]
+					& NCSerialProtocol.NC_FLAG_TARGET_REACHED;
+
+			log("rx holdtime: " + decoded_data[73]);
+
 			int target_deviation = Utils.parse_arr_2(27, decoded_data);
 			log("rx deviation: " + target_deviation);
 
 			// multiply by 10 because the distance read from the NC is in
 			// decimeters (saw this in code, the struct on MK site says
 			// centimeters)
-			if ((target_deviation <= current_wp.getToleranceRadius() * 10)
-					&& (target_deviation != 0)
-					&& (t_latitude == current_wp.getLat())
+			// if ((target_deviation <= (current_wp.getToleranceRadius() - 1) *
+			// 10)
+			// && (target_deviation != 0)
+			// && (t_latitude == current_wp.getLat())
+			// && (t_longitude == current_wp.getLon())) {
+			// WP_reached = true;
+			// }
+
+			if ((target_reached > 0) && (t_latitude == current_wp.getLat())
 					&& (t_longitude == current_wp.getLon())) {
 				WP_reached = true;
 			}

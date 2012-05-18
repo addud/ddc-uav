@@ -21,6 +21,13 @@ public class Parser {
 		pointList = new ArrayList<NCWayPoint>();
 	}
 
+	// 05-16 18:07:58.646: D/NCSerialProtocol(616): rx current position:
+	// 598411852 , 176454225
+	// 05-16 18:10:51.166: D/NCSerialProtocol(733): rx current position:
+	// 598412117 , 176460251
+	// 05-16 18:11:26.726: D/NCSerialProtocol(733): rx current position:
+	// 598414271 , 176454996
+
 	public ArrayList<NCWayPoint> parse() throws XmlPullParserException,
 			IOException {
 
@@ -29,11 +36,11 @@ public class Parser {
 		XmlPullParser xpp = factory.newPullParser();
 		xpp.setInput(new StringReader(
 				"<coordinates>"
-						+ "<coordinate><id>0</id><lat>59.84138710000000</lat><lng>17.645552900000000</lng><picture/><data/></coordinate>"
-						+ "<coordinate><id>0</id><lat>59.84117250000000</lat><lng>17.645402900000000</lng><picture/><data/></coordinate>"
-						+ "<coordinate><id>0</id><lat>59.84137610000000</lat><lng>17.645132900000000</lng><picture/><data/></coordinate>"
-						// +
-						// "<coordinate><id>0</id><lat>59.84137100000000</lat><lng>17.645181900000000</lng><picture/><data/></coordinate>"
+						+ "<coordinate><id>0</id><lat>59.84118520000000</lat><lng>17.645422500000000</lng><picture/><data/></coordinate>"
+						+ "<coordinate><id>0</id><lat>59.84121170000000</lat><lng>17.646025100000000</lng><picture/><data/></coordinate>"
+						+ "<coordinate><id>0</id><lat>59.84142710000000</lat><lng>17.645499600000000</lng><picture/><data/></coordinate>"
+						+ "<coordinate><id>0</id><lat>59.84118540000000</lat><lng>17.645422400000000</lng><picture/><data/></coordinate>"
+						+ "<coordinate><id>0</id><lat>59.84121170000000</lat><lng>17.646025100000000</lng><picture/><data/></coordinate>"
 						+ "</coordinates>"));
 
 		// xpp.setInput(new StringReader (getXMLfromSD()));
@@ -45,7 +52,7 @@ public class Parser {
 			} else if (eventType == XmlPullParser.START_TAG) {
 				if (xpp.getName().equalsIgnoreCase("coordinate")) {
 					type = "coordinate";
-					wyp = new NCWayPoint(0, 0, 5000);
+					wyp = new NCWayPoint(0, 0, 1000);
 				} else if (xpp.getName().equalsIgnoreCase("lat")) {
 					type = "lat";
 				} else if (xpp.getName().equalsIgnoreCase("lng")) {

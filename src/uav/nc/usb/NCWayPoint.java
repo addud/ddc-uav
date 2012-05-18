@@ -3,7 +3,7 @@ package uav.nc.usb;
 public class NCWayPoint {
 
 	/** time the MK should hold the position in seconds **/
-	private int hold_time = 1;
+	private int hold_time;
 
 	/**
 	 * the radius around the waypoint in meters in which the point is seen as
@@ -36,12 +36,13 @@ public class NCWayPoint {
 		this.setLat(lat);
 		this.setLon(lon);
 		this.setAlt(alt);
+		this.setHoldTime(1);
 		this.setPicture("");
 		this.setData("");
 		this.setEvent(new Event(true));
 		this.setStatus(1);
 		this.setToleranceRadius(5);
-		this.setTag(this.getLat() + "," + this.getLon());
+		this.setTag(lat + "," + lon);
 	}
 
 	public String getTag() {

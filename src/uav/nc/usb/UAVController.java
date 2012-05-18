@@ -51,6 +51,9 @@ public class UAVController extends Thread {
 
 		int retries;
 
+		NCWayPoint null_wp = new NCWayPoint(0, 0, 0);
+		null_wp.setStatus(0);
+
 		try {
 			this.setEventFinished();
 
@@ -78,6 +81,8 @@ public class UAVController extends Thread {
 
 			// send waypoints
 			for (int wp_index = 0; wp_index < wp_list.size(); wp_index++) {
+
+				nc.sendWaypoint(0, null_wp);
 
 				for (retries = 0; retries < UAVController.NUMBER_OF_RETRIES; retries++) {
 					nc.sendWaypoint(wp_index, wp_list.get(wp_index));
