@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlSerializer;
 
 import uav.nc.usb.NCWayPoint;
+
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
@@ -49,20 +50,37 @@ public class Constructor {
                                 serializer.endTag(null, "id");
                             
                                 serializer.startTag(null, "lat");
-                                serializer.text((Double.parseDouble(wp_array[i].getLat()+"")/Math.pow(10.0,7.0 ))+"");
+                                serializer.text((Double.parseDouble(wp_array[i].getLat()+"")/Math.pow(10.0,7.0))+"");
                                 serializer.endTag(null, "lat");
                                 
                                 serializer.startTag(null, "lng");
-                                serializer.text((Double.parseDouble(wp_array[i].getLon()+"")/Math.pow(10.0,7.0 ))+"");
+                                serializer.text((Double.parseDouble(wp_array[i].getLon()+"")/Math.pow(10.0,7.0))+"");
                                 serializer.endTag(null, "lng");                                
                                 
                                 serializer.startTag(null, "picture");
                                 serializer.text(wp_array[i].getPicture());
-                                serializer.endTag(null, "picture");
-                                serializer.text(wp_array[i].getData());
-                                serializer.startTag(null, "data");
+                                serializer.endTag(null, "picture");      
                                 
-                                serializer.endTag(null, "data");                              
+                                serializer.startTag(null, "data");
+                                serializer.text(wp_array[i].getData());
+                                serializer.endTag(null, "data");
+                                
+                                serializer.startTag(null, "altitude");
+                                serializer.text(wp_array[i].getAlt()+"");
+                                serializer.endTag(null, "altitude");
+                                
+                                serializer.startTag(null, "tag");
+                                serializer.text(wp_array[i].getTag());
+                                serializer.endTag(null, "tag");
+                                
+                                serializer.startTag(null, "holdtime");
+                                serializer.text(wp_array[i].getHoldTime()+"");
+                                serializer.endTag(null, "holdtime");
+                                
+                                serializer.startTag(null, "toleranceradius");
+                                serializer.text(wp_array[i].getToleranceRadius()+"");
+                                serializer.endTag(null, "toleranceradius");
+
                             serializer.endTag(null, "coordinate"); 
                         }
                         serializer.endTag(null, "coordinates");
