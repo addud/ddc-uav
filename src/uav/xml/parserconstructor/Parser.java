@@ -18,12 +18,12 @@ import uav.nc.usb.NCWayPoint;
 import android.os.Environment;
 
 public class Parser {
-	private List<NCWayPoint> pointList;
+	private ArrayList<NCWayPoint> pointList;
 	public Parser()
 	{
 		pointList = new ArrayList<NCWayPoint>();
 	}
-	public NCWayPoint[] parse() throws XmlPullParserException, IOException
+	public ArrayList<NCWayPoint> parse() throws XmlPullParserException, IOException
 	{
 		
 		/*NCWayPoint[] wp_list; = { new NCWayPoint(598412841, 176488838, 1500),
@@ -131,8 +131,7 @@ public class Parser {
      }
      eventType = xpp.next();
     }
-    NCWayPoint[] wp_array = new NCWayPoint[pointList.size()];
-    return pointList.toArray(wp_array);
+    return pointList;
 	}
 	
 	private String getXMLfromSD()
