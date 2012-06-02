@@ -27,7 +27,6 @@ public class UAVController extends Thread {
 			nc.init();
 			return 1;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}
@@ -38,7 +37,6 @@ public class UAVController extends Thread {
 			nc.deinit();
 			return 1;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}
@@ -135,11 +133,9 @@ public class UAVController extends Thread {
 			}
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, e.getMessage());
 		}
@@ -159,7 +155,6 @@ public class UAVController extends Thread {
 				wait();
 				Log.w(TAG, "wakeup");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

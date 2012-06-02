@@ -319,22 +319,12 @@ public class NCSerialProtocol {
 			// multiply by 10 because the distance read from the NC is in
 			// decimeters (saw this in code, the struct on MK site says
 			// centimeters)
-			// if ((target_deviation <= (current_wp.getToleranceRadius() - 1) *
-			// 10)
-			// && (target_deviation != 0)
-			// && (t_latitude == current_wp.getLat())
-			// && (t_longitude == current_wp.getLon())) {
-			// WP_reached = true;
-			// }
 
 			if ((target_reached > 0) && (t_latitude == current_wp.getLat())
 					&& (t_longitude == current_wp.getLon())) {
 				WP_reached = true;
 			}
 
-			// if (decoded_data[73] == 0) {
-			// // WP_reached = true;
-			// }
 			break;
 
 		case 'o':
@@ -392,7 +382,6 @@ public class NCSerialProtocol {
 	private byte[] encodeCommand(byte modul, char cmd, byte[] params) {
 
 		log("--------tx: " + cmd + "--------");
-		// log("tx command: " + cmd);
 
 		byte[] res = new byte[3 + (params.length / 3 + (params.length % 3 == 0 ? 0
 				: 1)) * 4 + 3]; // 5=1*start_char+1*addr+1*cmd+2*crc + line

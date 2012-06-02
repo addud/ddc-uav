@@ -149,7 +149,7 @@ public class Parser {
 	    }
 	}
 	catch (IOException e) {
-	    //You'll need to add proper error handling here
+	    
 	}
 	return text.toString();
 	}

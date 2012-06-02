@@ -35,26 +35,7 @@ public class UAVAppActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// new Initializer().execute((Void) null);
-
 		context = getApplicationContext();
-
-		// KeyguardManager mKeyGuardManager = (KeyguardManager)
-		// getSystemService(KEYGUARD_SERVICE);
-		// KeyguardLock mLock = mKeyGuardManager
-		// .newKeyguardLock("activity_classname");
-		// mLock.disableKeyguard();
-
-		// Button actButton = (Button) findViewById(id.button_act);
-		//
-		// actButton.setOnClickListener(new View.OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// // Call the CameraApp
-		// Intent intent = new Intent(UAVAppActivity.this, CameraApp.class);
-		// startActivityForResult(intent, CAMERA_ACIVITY_ID);
-		// }
-		// });
 
 		/*
 		 * This is the waypoints struct. The parameter given to the class must
