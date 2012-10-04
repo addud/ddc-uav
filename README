@@ -1,0 +1,77 @@
+******************************************************************************************
+* Step by step guide for setting up Distributed Data Collection with the Mikrokopter UAV *
+******************************************************************************************
+
+
+This is a quick step by step guide to getting the software for Distributed data collection with the Mikrokopter UAV up and running. Please refer to the report “Distributed data collection with an UAV.pdf” for a general overview of the system; both the hardware and software architectures are described there.
+
+1. Setting up the UAV
+
+The UAV used in this project was the MK-QuadroKopter / L4-ME from the website www.mikrokopter.de.
+The first step would be to assemble or procure such a device. The mikropkopter must be flashed with the firmware provided by the producer. For info on how to do that, please consult the website www.mikrokopter.de. This is done using the MK-USB device provided by Mikrokopter and the pc application MikroKopter-Tool. 
+
+All the firmware and software is available on the Mikrokopter svn server:  svn.mikrokopter.de. the firmware versions we used for testing were:
+MikroKopter-Tool: Kopter_Tool_V1_76b.zip
+FlightCtrl: V0.86d
+NaviCtrl: V0.26g
+BL-Ctrl: V0.31b
+
+2. Setting up the phone
+
+We used the HTC Hero phone with a linux kernel patch to enable it to work in USB host mode. The proper way to set it up is detailed here: www.it.uu.se/edu/course/homepage/datakom3/vt12/projects/hero-usb-host
+
+3. Setting up the Android development environment
+
+First the Android SDK must be installed. A very good guide of how to do that is available on the android developer page at developer.android.com/sdk/installing.html
+
+We used Eclipse as our  IDE to develop the project. So the easiest way would be to import it into Eclipse as an already existent project.
+
+4. Setting up the Waypoint Generation Interface
+
+To run the WP Generation Interface, a PHP must be installed on the system. The one that we used is XAMPP and is available here: www.apachefriends.org/en/xampp.html, together with documentation of how to install and use it. 
+
+The PHP application must be copied into the htdocs folder of the server, and it can be started as localhost/new/map.php
+
+5. Setting up the connection between the mikrokopter and the phone
+
+For this a USB to serial converter must be used. We used the MK-USB that came with the mikrokopter. The USB end must be plugged into the phone and the serial end must be connected to the debug port on the NaviCtrl board on the mikrokopter.
+
+As the HTC Hero phone doesn’t power the USB bus as a USB host is supposed to do, we need to power the MK-USB from some other way. We used the +5V and Gnd pins on one of the Servo connectors on the FlightCtrl (SV3 and SV4) to connect to the corresponding +5v and Gnd pins on the X3 connector on the MK-USB.
+
+6. Setting up the connection between the computer and the phone
+
+As the USB port of the phone is used for communicating with the kopter, in order to upload the android application on the phone and do realtime debugging, we need to connect to the phone wirelessly. For this we used Android Debug Bridge that comes with the Android SDK. The manual and documentation is available developer.android.com/guide/developing/tools/adb.html. A quick setup guide is also available at www.it.uu.se/edu/course/homepage/datakom3/vt12/projects/hero-usb-host
+
+7. Starting the application
+
+To run the application we must generate an XML file with the wanted waypoints. We use the PHP Waypoint Generation Interface for this. The created waypoint file must be stored on the SD card in the phone so that it can be loaded by the Android app. After this, we upload the application package generated in Eclipse through ADB. We turn the Mikrokopter on and start the application. 
+
+It would be a good idea to start the application from Eclipse and keep the debugger on. It is possible that due to improper initialization of the communication between the phone and the MK-USB upon power-up, the application will give a communication timeout. In this case the MK-USB must be powered off and back on again and the application restarted. This must be repeated every time the phone loses connectivity with the MK-USB.
+
+Once the debugger is printing a series of commands sent and received from the mikropkopter, we are ready to go.
+
+8. Flying the Mikrokopter
+
+It is recommended that the user gets familiar with flying the kopter alone before trying to use the data collection application. Please refer to www.mikrokopter.de for the specific flight functions. The flight procedure must follow strictly the following steps:
+
+a) The kopter must be set on the ground with the phone mounted and and no attaching wires
+b) Before starting the engines, make sure that the AltitudeHold is OFF, Carefree is OFF and the GPS is OFF.
+c) Start the engines
+d) Set GPS to PositionHold
+e) Raise the kopter a little in the air, set AltitudeHold to ON and wait until it stabilizes
+f)  If wanted, you can enable the Carefree option as it might prove helpful for maneuvering the kopter in case it goes too far
+g) Raise the kopter a bit more in the air, around the wanted altitude of navigation.
+h) Now we are ready to initiate the waypoint navigation. To do this, set the GPS switch to the ComingHome position. The kopter will start making its rounds, collecting data from the waypoints.
+i) Once it has reached the last waypoint, it stays hovering there. To bring it back, set the GPS switch to the OFF position, and then to the ComingHome position. It will automatically return to the position where it was first started. A smart thing would be to set the last waypoint as the waypoint where you want the kopter to return after it’s finished, so that it returns automatically.
+
+9. Downloading the data
+For this you need to access the SD card on the phone. The pictures taken will be stored under the folder UAV. 
+
+That was it! Now you have all that precious little data collected from all those inaccessible plaices in the palm of your hand.  Enjoy your coffee!
+
+
+
+
+
+
+
