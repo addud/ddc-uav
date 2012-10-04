@@ -1,0 +1,24 @@
+table.sofT
+{ text-align: center;
+font-family: Verdana;
+font-weight: normal;
+font-size: 11px;
+color: #404040;
+width: 350px;
+background-color: #fafafa;
+border: 1px #6699CC solid;
+border-collapse: collapse;
+border-spacing: 0px; 
+/*height:200px;*/
+}
+
+td.helpHed
+{ border-bottom: 2px solid #669;
+border-left: 1px solid #669;
+background-color: #8282C3;
+text-align: left;
+text-indent: 5px;
+
+font-weight: normal;
+color: white;
+ }
